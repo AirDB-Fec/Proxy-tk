@@ -13,7 +13,21 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
+
+
+/* Client Side Rendering:
+
+app.use('/client/:id/', express.static('public'));
+
+app.get('/client/:id/main.css', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/main.css'));
+});
+
+app.get('/client/:id/bundle.js', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/bundle.js'));
+});
+
+*/
 
 app.get('/rooms/:id/bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/bundle.js'));
