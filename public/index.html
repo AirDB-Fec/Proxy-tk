@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>TEST PAGE</title>
-  <style type="text/css"></style>
-</head>
-<body>
-  <div>HELLO WORLD</div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>AirDnB</title>
+  </head>
+  <body>
+    <div id="header"></div>
+    <div id="photo"></div>
+    <main class="fx container">
+      <div class="main-left">
+        <div id="info"></div>
+        <div id="availability"></div>
+        <div id="reviews"></div>
+      </div>
+      <div id="booking"></div>
+    </main>
+    <div id="footer"></div>
+  </body>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script type="text/javascript" src="bundle.js"></script>
+  <script>
+    fetch('http://ec2-54-153-97-92.us-west-1.compute.amazonaws.com:3004/api/rooms/' + window.location.pathname.match(/([0-9])+/)[0] + '/photos')
+      .then(res => res.json())
+      .then((result) => {
+        ReactDOM.render(
+          React.createElement(Applet, { photos: result }),
+          document.getElementById('photo'),
+        );
+        ReactDOM.render(React.createElement(Footer), document.getElementById('footer'));
+      })
+      .catch(err => console.error(err));
+  </script>
 </html>
