@@ -40,13 +40,10 @@ const get = function getDataFromServices(id, cb) {
     .then((arr) => {
       const applet = renderComponent(Photos.default.Applet, { photos: arr[0] });
       const footer = renderComponent(Photos.default.Footer);
-
-      const page = layout(styles(), apps(applet, footer), scripts());
+      const page = layout(styles(), apps(applet, footer), scripts(arr[0]));
       cb(page);
     })
     .catch(err => console.error(err));
 };
 
 module.exports = { route, get };
-// need to get data from each service
-// need to render data after receiving it from service
